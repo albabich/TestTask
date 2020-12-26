@@ -1,8 +1,6 @@
 package com.space.service.specs;
 
 import com.space.model.Ship;
-import com.space.service.specs.Filter;
-import com.space.service.specs.QueryOperator;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -14,11 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ShipSpecification implements Specification<Ship> {
-    private List<Filter> filters;
-
-    public ShipSpecification(List<Filter> filters) {
-        this.filters = filters;
-    }
+    private final List<Filter> filters;
 
     public ShipSpecification() {
         this.filters = new ArrayList<>();

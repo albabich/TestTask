@@ -1,8 +1,8 @@
 package com.space.controller;
 
 import com.space.model.Ship;
-import com.space.model.ShipType;
 import com.space.service.ShipService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,9 @@ import java.util.Map;
 @RequestMapping("/rest")
 public class ShipController {
 
-    private ShipService shipService;
+    private final ShipService shipService;
 
+    @Autowired
     public ShipController(ShipService shipService) {
         this.shipService = shipService;
     }
@@ -25,16 +26,6 @@ public class ShipController {
     public ResponseEntity<List<Ship>> listOfShips(@RequestParam Map<String, String> params) {
         return ResponseEntity.ok().body(shipService.listOfShips(params));
     }
-
-//    public ResponseEntity<List<Ship>> listAllShips(@RequestParam(name = "name", required = false, defaultValue = "0") int name,
-//                                                   @RequestParam(name = "planet",required = false,defaultValue = "0") int planet,
-//                                                   @RequestParam(name = "shipType",required = false,defaultValue = "0") ShipType shipType,
-//                                                   @RequestParam(name = "pageNumber", required = false, defaultValue = "0") int pageNumber,
-//                                                   @RequestParam(name = "pageSize", required = false, defaultValue = "3") int pageSize,
-//                                                   @RequestParam(name = "order", required = false, defaultValue = "ID") ShipOrder shipOrder) {
-//        List<Ship> ships = shipService.listAllShips(pageNumber, pageSize, shipOrder);
-//        return ResponseEntity.ok().body(ships);
-//    }
 
     @GetMapping("/ships/count")
     public ResponseEntity<Long> shipsCount(@RequestParam Map<String, String> params) {
